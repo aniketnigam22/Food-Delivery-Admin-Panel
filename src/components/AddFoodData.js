@@ -1,35 +1,70 @@
 import React, { useState } from 'react'
 import './AddFoodData.css'
+import { db, storage } from '../Firebase/FirebaseConfig'
+import { addDoc, collection } from 'firebase/firestore'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+
 
 const AddFoodData = () => {
     const [foodName, setFoodName] = useState('')
     const [foodDescription, setFoodDescription] = useState('')
     const [foodPrice, setFoodPrice] = useState()
     const [foodCategory, setFoodCategory] = useState('')
-    const [foodImage, setFoodImage] = useState('')
+    const [foodImage, setFoodImage] = useState(null)
     const [restaurantName, setRestaurantName] = useState('')
     const [foodAddress, setFoodAddress] = useState('')
     const [restaurantPhone, setRestaurantPhone] = useState('')
+    const [foodImageUrl, setFoodImageUrl] = useState('')
 
     const handleImageChange = (e) => {
         setFoodImage(e.target.files[0]);
     };
 
-  
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        const foodData = {
-            foodName,
-            foodDescription,
-            foodPrice,
-            foodCategory,
-            restaurantName,
-            foodAddress,
-            restaurantPhone,
-            foodImage
+
+        if (foodImage == null) {
+            alert('Please select an image')
+            return
+        } else {
+            const imageRef = ref(storage, `FoodImage/${foodImage.name}`)
+            uploadBytes(imageRef, foodImage)
+                .then(() => {
+                    alert('Image uploaded successfully')
+                    getDownloadURL(imageRef)
+                        .then((url) => {
+                            console.log(url)
+                            // setFoodImageUrl(url)
+
+                            const foodData = {
+                                foodName,
+                                foodDescription,
+                                foodPrice,
+                                foodCategory,
+                                restaurantName,
+                                foodAddress,
+                                restaurantPhone,
+                                foodImageUrl:url
+                            }
+
+                            console.log(foodData)
+
+                            try {
+                                const docRef = addDoc(collection(db, 'FoodData'), foodData);
+                                alert(`Data Added Successfully${docRef.id}`)
+
+                            } catch (e) {
+                                console.log(`Error adding doucment ${e}`)
+                            }
+                        })
+                })
+                .catch((error) => {
+                    alert('something went wrong while uploading image', error.message)
+                })
         }
 
-        console.log(foodData)
+
     }
 
     return (
@@ -68,6 +103,8 @@ const AddFoodData = () => {
                 <input type='file' name='food_image'
                     onChange={handleImageChange}
                 />
+
+
 
                 <br />
 
