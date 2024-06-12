@@ -1,7 +1,19 @@
 import React, { useState } from 'react'
 import './AddFoodData.css'
+
+// importing db and storage form FirebaseConfig for storing the data and file
 import { db, storage } from '../Firebase/FirebaseConfig'
+
+// addDoc and collection are the firebase function 
+// Firestore is a cloud-based NoSQL database that allows you to store and sync data for your app.
+// It’s part of the Firebase suite of products offered by Google.
+// collection:Purpose: To specify which collection you want to work with in your Firestore database.
+// addDoc: To add a new document to a specified collection in Firestore.
 import { addDoc, collection } from 'firebase/firestore'
+
+// uploadBytes:To upload a file to the specified storage reference.
+// getDownloadURL:  To get the download URL for a file stored in Firebase Storage.
+// ref : : To create a reference to a specific location in Firebase Storage.
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 
@@ -28,11 +40,21 @@ const AddFoodData = () => {
             alert('Please select an image')
             return
         } else {
+            //here we are uploading the image in storage
+            // ref(storage, ...): Purpose: This creates a reference to a specific location in Firebase Storage where a file will be stored or accessed.
+            //storage: This is the Firebase Storage instance.
+            // FoodImage: This is a folder (or directory) within Firebase Storage. 
+            // foodImage.name is "pizza.jpg", the path would be "FoodImage/pizza.jpg"
+            // Creates a storage path: It constructs a path in Firebase Storage where the file will be saved.
             const imageRef = ref(storage, `FoodImage/${foodImage.name}`)
+
+            //uploadBytes: This function uploads a file (in bytes) to a specified reference in Firebase Storage.
+            //imageRef: This is a reference to a specific location in Firebase Storage.
+            //food image is the file you want to upload 
             uploadBytes(imageRef, foodImage)
                 .then(() => {
                     alert('Image uploaded successfully')
-                    getDownloadURL(imageRef)
+                    getDownloadURL(imageRef)//form imageRef location get the link of the image 
                         .then((url) => {
                             console.log(url)
                             // setFoodImageUrl(url)
@@ -45,17 +67,25 @@ const AddFoodData = () => {
                                 restaurantName,
                                 foodAddress,
                                 restaurantPhone,
-                                foodImageUrl:url
+                                foodImageUrl:url//here we are setting the url of the image
                             }
 
                             console.log(foodData)
 
                             try {
+                                //here we are uploading the data in cloud firestore
+                                //addDoc:  is a function that adds a new document to a specified Firestore collection.
+                                // collection:This part gets a reference to the 'FoodData' collection in your Firestore database.
+                                //db:  This is your Firestore database instance, typically imported from your Firebase configuration.
+                                //FoodData is the name of your collection or table in firebase
+                                //foodData is the the data which you want to save to the firebase
                                 const docRef = addDoc(collection(db, 'FoodData'), foodData);
-                                alert(`Data Added Successfully${docRef.id}`)
+                                alert(`Data Added Successfully${docRef}`)
 
                             } catch (e) {
-                                console.log(`Error adding doucment ${e}`)
+                                console.log(`Error adding doucment ${e.message}`)
+                                alert(`Error adding doucment ${e.message}`)
+
                             }
                         })
                 })
