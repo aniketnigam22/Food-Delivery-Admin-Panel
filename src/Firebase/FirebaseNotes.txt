@@ -1,0 +1,43 @@
+In this notes we will learn about how to store data into the firebase and how to set up the project
+
+step 1. open firebase - firebase.google.com
+step 2. click on get started
+step 3. make sure that you google account is logged in already
+step 4. Enter your project name for ex - food-delevery-app
+step 5. there is no use of analytics so you can close that 
+step 6. click on create project, after 1 -2 min you project will be created
+step 7. now your project is created, now look for the web icon </> like this , if you are not able to see this icon then you can get it on project settings
+step 8. click on that icon </> then register you app, you can give any name like like food app, don't click on hosting you can do that separately afterwards
+step 9. now run the command in your project terminal npx install firebase
+
+step 10. now create a file in your project name FirebaseConfig.js and in the file copy this code which you have got from the firebase basically this contain the 
+key and other detail related to the project that you have set up on firbase and this will help you in integrating your project with firebase
+
+
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCB3bKjxCVw4d-Miwh8-8UO3i2eaNkGi50",
+  authDomain: "food-delivery-app-1ab15.firebaseapp.com",
+  projectId: "food-delivery-app-1ab15",
+  storageBucket: "food-delivery-app-1ab15.appspot.com",
+  messagingSenderId: "219053985271",
+  appId: "1:219053985271:web:c47bd2b394c7e9b5a872f2"
+};
+
+step 11. now come to firebase cloude firestore, this is the place where you store the data , basically this is like a database where you can create table like 
+struecture and store your data
+
+step 12. inside cloud firestore click on create database 
+
+step 13. inside rules set the read , write  to true, if they ask for publish then publish it 
+
+step 14. after setting up the firebase cloud firestorage, you have to setup the storage, basically this part is for storing the document files like pdf, images 
+this will we used to store the image of the foods , you cannot store them in firebase cloudfire
+
+step 15. what we will do is that we will store the image in storage and we will get a link from there then that link we will store in cloud firestore and 
+when we retrieve the data from the firestore we will get the link and from the link we will be able to see the image
+
+step 16. in the stroge in the rule section you need to set the read , write to true and then publish it 
+
+step 17. now for further part refer to the FirebaseConfig.js and AddFoodData.js files comments are written there
