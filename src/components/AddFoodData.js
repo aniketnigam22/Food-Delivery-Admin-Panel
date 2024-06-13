@@ -24,9 +24,26 @@ const AddFoodData = () => {
     const [foodCategory, setFoodCategory] = useState('')
     const [foodImage, setFoodImage] = useState(null)
     const [restaurantName, setRestaurantName] = useState('')
-    const [foodAddress, setFoodAddress] = useState('')
+
     const [restaurantPhone, setRestaurantPhone] = useState('')
     const [foodImageUrl, setFoodImageUrl] = useState('')
+
+    const [foodType, setFoodType] = useState('')
+    const [mealType, setMealType] = useState('')
+    const [foodAddon, setFoodAddon] = useState('')
+    const [foodAddonPrice, setFoodAddonPrice] = useState('')
+
+    const [resturantEmail, setResturantEmail] = useState('')
+
+    const [resturantAddressBuilding, setrestureantAddressBuilding] = useState('')
+    const [resturantAddressStreet, setrestureantAddressStreet] = useState('')
+    const [resturantAddressCity, setrestureantAddressCity] = useState('')
+    const [resturantAddressPincode, setrestureantAddressPincode] = useState('')
+
+
+
+
+
 
     const handleImageChange = (e) => {
         setFoodImage(e.target.files[0]);
@@ -65,9 +82,18 @@ const AddFoodData = () => {
                                 foodPrice,
                                 foodCategory,
                                 restaurantName,
-                                foodAddress,
                                 restaurantPhone,
-                                foodImageUrl:url//here we are setting the url of the image
+                                foodImageUrl: url,//here we are setting the url of the image
+                                foodType,
+                                mealType,
+                                foodAddon,
+                                foodAddonPrice,
+                                resturantEmail,
+                                resturantAddressBuilding,
+                                resturantAddressCity,
+                                resturantAddressPincode,
+                                resturantAddressStreet
+
                             }
 
                             console.log(foodData)
@@ -115,17 +141,72 @@ const AddFoodData = () => {
 
                 <br />
 
-                <label>Food Price</label>
-                <input type='number' name='food_price'
-                    onChange={(e) => { setFoodPrice(e.target.value) }}
-                />
+                <div className='form-row'>
+                    <div className='form-col'>
+                        <label>Food Price</label>
+                        <input type='number' name='food_price'
+                            onChange={(e) => { setFoodPrice(e.target.value) }}
+                        />
+                    </div>
+
+                    <div className='form-col'>
+                        <label>Food Type</label>
+                        <select name='food-type' onChange={(e) => { setFoodType(e.target.value) }}>
+                            <option value='null'>Select Food Type</option>
+                            <option value='veg'>Veg</option>
+                            <option value='non-veg'>Non-Veg</option>
+                        </select>
+                    </div>
+
+
+                </div>
 
                 <br />
 
-                <label>Food Category</label>
-                <input type='text' name='food_category'
-                    onChange={(e) => { setFoodCategory(e.target.value) }}
-                />
+                <br />
+
+                <div className='form-row'>
+                    <div className='form-col'>
+                        <label>Food Category</label>
+                        <select name='food_category' onChange={(e) => { setFoodCategory(e.target.value) }}>
+                            <option value='null'>Select Food Category</option>
+                            <option value='indian'>Indian</option>
+                            <option value='chinese'>Chinese</option>
+                            <option value='italian'>Italian</option>
+                            <option value='mexican'>Mexican</option>
+                            <option value='american'>American</option>
+                        </select>
+                    </div>
+
+                    <div className='form-col'>
+                        <label>Meal Type</label>
+                        <select name='meal_type' onChange={(e) => { setMealType(e.target.value) }}>
+                            <option value='null'>Select meal type</option>
+                            <option value='dinner'>Dinner</option>
+                            <option value='starter'>Starter</option>
+                            <option value='breakfast'>Breakfast</option>
+                            <option value='liquid'>Liquid</option>
+                        </select>
+                    </div>
+                </div>
+
+                <br />
+
+                <div className='form-row'>
+                    <div className='form-col'>
+                        <label>Add On Name</label>
+                        <input type='text' name='food_addon'
+                            onChange={(e) => { setFoodAddon(e.target.value) }}
+                        />
+                    </div>
+
+                    <div className='form-col'>
+                        <label>Add On Price</label>
+                        <input type='text' name='food_addon_price'
+                            onChange={(e) => { setFoodAddonPrice(e.target.value) }}
+                        />
+                    </div>
+                </div>
 
                 <br />
 
@@ -144,18 +225,57 @@ const AddFoodData = () => {
                 />
 
                 <br />
+                <div className='form-row'>
+                    <div className='form-col'>
+                        <label>Resturant Building Number/Name</label>
+                        <input type='text' name='resturant_address_building'
+                            onChange={(e) => { setrestureantAddressBuilding(e.target.value) }}
+                        />
+                    </div>
 
-                <label>Food Address</label>
-                <input type='text' name='restaurant_address'
-                    onChange={(e) => { setFoodAddress(e.target.value) }}
-                />
+                    <div className='form-col'>
+                        <label>Resturant Street/Area Name</label>
+                        <input type='text' name='resturant_street_address'
+                            onChange={(e) => { setrestureantAddressStreet(e.target.value) }}
+                        />
+                    </div>
+                </div>
 
-                <br />
 
-                <label>Restaurant Phone</label>
-                <input type='text' name='restaurant_phone'
-                    onChange={(e) => { setRestaurantPhone(e.target.value) }}
-                />
+
+                <div className='form-row'>
+                    <div className='form-col'>
+                        <label>Resturant Pincode</label>
+                        <input type='text' name='resturant_address_pincode'
+                            onChange={(e) => { setrestureantAddressPincode(e.target.value) }}
+                        />
+                    </div>
+
+                    <div className='form-col'>
+                        <label>Resturant City</label>
+                        <input type='text' name='resturant_address_city'
+                            onChange={(e) => { setrestureantAddressCity(e.target.value) }}
+                        />
+                    </div>
+                </div>
+
+
+                <div className='form-row'>
+                    <div className='form-col'>
+                        <label>Resturant Phone Number</label>
+                        <input type='text' name='resturant_phone'
+                            onChange={(e) => { setRestaurantPhone(e.target.value) }}
+                        />
+                    </div>
+
+                    <div className='form-col'>
+                        <label>Resturant Email</label>
+                        <input type='text' name='resturant_email'
+                            onChange={(e) => { setResturantEmail(e.target.value) }}
+                        />
+                    </div>
+                </div>
+
 
                 <br />
 
