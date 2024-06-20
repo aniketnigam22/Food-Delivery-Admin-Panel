@@ -40,11 +40,6 @@ const AddFoodData = () => {
     const [resturantAddressCity, setrestureantAddressCity] = useState('')
     const [resturantAddressPincode, setrestureantAddressPincode] = useState('')
 
-
-
-
-
-
     const handleImageChange = (e) => {
         setFoodImage(e.target.files[0]);
     };
@@ -92,8 +87,8 @@ const AddFoodData = () => {
                                 resturantAddressBuilding,
                                 resturantAddressCity,
                                 resturantAddressPincode,
-                                resturantAddressStreet
-
+                                resturantAddressStreet,
+                                id: new Date().getTime().toString()
                             }
 
                             console.log(foodData)
