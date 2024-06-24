@@ -20,7 +20,7 @@
 .form-inner input, .form-inner select {
     width: 100%;
     height: 40px;
-    border: 1px solid gray;
+    border: 1px solid rgb(152, 61, 61);
     border-radius: 5px;
     padding: 0 10px;
     margin-bottom: 10px;
@@ -36,7 +36,7 @@
     height: 40px;
     border: 1px solid black;
     border-radius: 5px;
-    background-color: rgb(70, 155, 70);
+    background-color: rgb(152, 61, 61);
     color: black;
     font-size: 20;
     cursor: pointer;
@@ -56,4 +56,15 @@
     flex-direction: column;
     justify-content: center;
     width: 45%;
+}
+
+.heading {
+    font-size: 50px;
+    font-weight: 200;
+    color:  rgb(152, 61, 61);;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.foodButton {
+    background-color:  rgb(152, 61, 61);
 }
