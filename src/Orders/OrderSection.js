@@ -6,8 +6,6 @@ import { db } from '../Firebase/FirebaseConfig'
 import { Link } from 'react-router-dom'
 
 
-
-
 const OrderSection = () => {
 
     const [allorders, setAllOrders] = useState([])
@@ -175,7 +173,7 @@ const OrderSection = () => {
                                                 <input type="text" placeholder="Enter deliveryboy_phone" onBlur={(e) => changeDeliveryboyPhone(order.orderId, order, e.target.value)} className='orderinput' />
                                         }
                                         <p className='ordertxt'>{order.ordercost}</p>
-                           
+
                                         <Link to={`/orderdetails/${order.orderId}`}><button>show details</button></Link>
 
 

@@ -68,3 +68,6 @@
 .foodButton {
     background-color:  rgb(152, 61, 61);
 }
+select {
+    width: 200px;
+}
